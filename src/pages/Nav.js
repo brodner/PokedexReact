@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 
 const Nav = () => {
     return (
-        <div>
-            <nav className="text-right  col-span-12 md:flex md:flex-row ">
+        <div className="w-screen">
+            <nav className="text-right md:flex md:flex-row ">
                 <div className="flex justify-between items-center">
                     <h1 className="font-bold uppercase p-4">
                         <Link to="/" className="text-emerald-500 sm:text-red-500"> Pokedex</Link>

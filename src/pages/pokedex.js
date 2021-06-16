@@ -40,7 +40,7 @@ const Pokedex = () => {
                         ) : listPokemon.map((pokemon, index) => {
                             return (
                                 <div key={index}
-                                    className="rounded-xl px-5 pb-1 bg-yellow-200 relative">
+                                    className="rounded-xl px-5 pb-1 bg-yellow-200 relative max-w-md">
                                     <div className="">
                                         <img src={"https://assets.pokemon.com/assets/cms2/img/pokedex/detail/025.png"}
                                             alt="Pikachu"
