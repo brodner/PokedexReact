@@ -30,14 +30,15 @@ const PokemonInfo = (props) => {
 
     const loadPokemonFromServer = async (pokemon) => {
         try {
-            const serverConsult = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-            const requestToJson = await serverConsult.json()
-            setDataPokemon(requestToJson)
+            const basciPokemonInfo = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+            const basciPokemonInfoToJson = await basciPokemonInfo.json()
+            const pokemonSpeciesinfo = await fetch(basciPokemonInfoToJson.species.url)
+            const pokemonSpeciesinfoToJson = await pokemonSpeciesinfo.json()
+            setDataPokemon({basciPokemonInfoToJson,pokemonSpeciesinfoToJson})
             setLoad(false)
             console.log(dataPokemon);
         } catch (error) {
             console.log(error);
-            console.log({dataPokemon});
         }
 
     }
@@ -71,23 +72,23 @@ const PokemonInfo = (props) => {
                         </div>
                     </div>
                 </div>
-            ) : (
+             ) : (
                 <div className={
                     `grid grid-cols-1 md:mx-15 pt-4 shadow-inner ${
-                        backgroundColorTypePokemon[dataPokemon.types[0].type.name]
+                        backgroundColorTypePokemon[dataPokemon.basciPokemonInfoToJson.types[0].type.name]
                     } `
                 }>
                     <div className="col-span-1 flex flex-col items-center">
                         {
-                        dataPokemon.id > 472 ? <img src={
-                                dataPokemon.sprites.other["official-artwork"].front_default
+                        dataPokemon.basciPokemonInfoToJson.id > 472 ? <img src={
+                                dataPokemon.basciPokemonInfoToJson.sprites.other["official-artwork"].front_default
                             }
                             alt={
-                                dataPokemon.name
+                                dataPokemon.basciPokemonInfoToJson.name
                             }
                             className=" object-cover w-max"/> : <img src={
                                 `https://img.pokemondb.net/sprites/go/normal/${
-                                    dataPokemon.name
+                                    dataPokemon.basciPokemonInfoToJson.name
                                 }.png`
                             }
                             alt=""
@@ -97,11 +98,11 @@ const PokemonInfo = (props) => {
                     <div className="bg-white col-span-1 md:mx-16 border shadow-lg rounded-3xl pt-5">
                         <h1 className='font-bold text-4xl px-5 py-3 text-center uppercase '>
                             {
-                            dataPokemon.name
+                            dataPokemon.basciPokemonInfoToJson.name
                         }</h1>
                         <div className="flex flex-wrap gap-1 col-span-1 justify-center">
                             {
-                            dataPokemon.types.map(({
+                            dataPokemon.basciPokemonInfoToJson.types.map(({
                                 type
                             }, index) => <span key={
                                     `type${index}`
@@ -119,7 +120,7 @@ const PokemonInfo = (props) => {
                             <div className="flex flex-col gap-4 border-2 rounded-lg border-gray-200 border-opacity-50 p-8 col-span-3 md:col-span-1">
                                 <h1 className="text-center text-sm">Estadisticas</h1>
                                 {
-                                dataPokemon.stats.map((data) => (
+                                dataPokemon.basciPokemonInfoToJson.stats.map((data) => (
                                     <div>
                                         <div className="bg-white rounded-lg w-72 shadow block p-4 m-auto">
                                             {
@@ -141,7 +142,7 @@ const PokemonInfo = (props) => {
                                     <span className='block'>No.</span>
                                     <span className='block'>
                                         {
-                                        dataPokemon.id
+                                        dataPokemon.basciPokemonInfoToJson.id
                                     }</span>
                                 </div>
                             </div>
@@ -151,7 +152,7 @@ const PokemonInfo = (props) => {
                                     <span className='block'>No.</span>
                                     <span className='block'>
                                         {
-                                        dataPokemon.id
+                                        dataPokemon.basciPokemonInfoToJson.id
                                     }</span>
                                 </div>
                             </div>
