@@ -15,13 +15,15 @@ module.exports = {
       red: colors.rose,
       yellow: colors.amber,
       blue: colors.blue,
-      emerald:colors.emerald
+      emerald: colors.emerald,
+      violet: colors.violet,
+      pink: colors.pink,
     },
-    fontFamily:{
-      body:['Nunito']
+    fontFamily: {
+      body: ['Nunito']
     },
-    backgroundImage:theme=>({
-      bgpokebol:"url('./images/bg_pokeball.png')"
+    backgroundImage: theme => ({
+      bgpokebol: "url('./images/bg_pokeball.png')"
     })
   },
   variants: {
