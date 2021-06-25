@@ -31,8 +31,9 @@ const PokemonInfo = props => {
 
   const loadPokemonFromServer = async pokemon => {
     try {
+      const textToLowercase = pokemon.toLowerCase()
       const basciPokemonInfo = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${pokemon}`
+        `https://pokeapi.co/api/v2/pokemon/${textToLowercase}`
       )
       const basicPokemonInfoToJson = await basciPokemonInfo.json()
       const pokemonSpeciesinfo = await fetch(basicPokemonInfoToJson.species.url)
