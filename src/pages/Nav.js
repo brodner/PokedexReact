@@ -71,7 +71,7 @@ const Nav = () => {
               className='px-4 flex justify-start'
               activeClassName='text-emerald-500'
             >
-              <span>Regiones</span>
+              <span>Pokedex</span>
               <svg
                 className='w-5 h-5 ml-2'
                 fill='none'

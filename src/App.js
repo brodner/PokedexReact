@@ -5,6 +5,7 @@ import Pokedex from './pages/pokedex'
 import PokemonInfo from './pages/PokemonInfo'
 import Error404 from './pages/404'
 import SearchPokemon from './pages/searchPokemon'
+import Pokemon3D from './components/Pokemon3D'
 
 function App () {
   return (
@@ -15,6 +16,7 @@ function App () {
           <Route path='/Pokedex' exact component={Pokedex} />
           <Route path='/PokemonInfo/:pokemon' exact component={PokemonInfo} />
           <Route path='/searchPokemon/:pokemon' exact component={SearchPokemon} />
+          <Route path='/3dPokemon' exact component={Pokemon3D} />
           <Route path='*' component={Error404} />
 
         </Switch>
