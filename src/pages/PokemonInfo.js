@@ -3,24 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Nav from './Nav'
 import { useParams, useHistory } from 'react-router-dom'
-import iconbug from '../images/icon/bug.svg'
-import icondark from '../images/icon/dark.svg'
-import icondragon from '../images/icon/dragon.svg'
-import iconelectric from '../images/icon/electric.svg'
-import iconfairy from '../images/icon/fairy.svg'
-import iconfighting from '../images/icon/fighting.svg'
-import iconfire from '../images/icon/fire.svg'
-import iconflying from '../images/icon/flying.svg'
-import iconghost from '../images/icon/ghost.svg'
-import icongrass from '../images/icon/grass.svg'
-import iconground from '../images/icon/ground.svg'
-import iconice from '../images/icon/ice.svg'
-import iconnormal from '../images/icon/normal.svg'
-import iconpoison from '../images/icon/poison.svg'
-import iconpsychic from '../images/icon/psychic.svg'
-import iconrock from '../images/icon/rock.svg'
-import iconsteel from '../images/icon/steel.svg'
-import iconwater from '../images/icon/water.svg'
+import IconTypePokemon from '../components/IconTypePokemon'
 
 const backgroundColorTypePokemon = {
   ghost: 'bg-violet-400',
@@ -181,29 +164,11 @@ const PokemonInfo = props => {
               <div className='grid justify-items-center'>
                 <div key={`${dataPokemon.type1}index`} className='flex-row justify-items-center'>
                   {dataPokemon.types.map(
-                    ({ type }, index) =>
-                      (
-                        <div key={`${type.name + index}`} className={`icon ${type.name} inline-block mx-2`}>
-                          <img src={iconbug} className={`${type.name !== 'bug' && 'hidden'}`} alt='' />
-                          <img src={icondark} className={`${type.name !== 'dark' && 'hidden'}`} alt='' />
-                          <img src={icondragon} className={`${type.name !== 'dragon' && 'hidden'}`} alt='' />
-                          <img src={iconelectric} className={`${type.name !== 'electric' && 'hidden'}`} alt='' />
-                          <img src={iconfairy} className={`${type.name !== 'fairy' && 'hidden'}`} alt='' />
-                          <img src={iconfighting} className={`${type.name !== 'fighting' && 'hidden'}`} alt='' />
-                          <img src={iconfire} className={`${type.name !== 'fire' && 'hidden'}`} alt='' />
-                          <img src={iconflying} className={`${type.name !== 'flying' && 'hidden'}`} alt='' />
-                          <img src={iconghost} className={`${type.name !== 'ghost' && 'hidden'}`} alt='' />
-                          <img src={icongrass} className={`${type.name !== 'grass' && 'hidden'}`} alt='' />
-                          <img src={iconground} className={`${type.name !== 'ground' && 'hidden'}`} alt='' />
-                          <img src={iconice} className={`${type.name !== 'ice' && 'hidden'}`} alt='' />
-                          <img src={iconnormal} className={`${type.name !== 'normal' && 'hidden'}`} alt='' />
-                          <img src={iconpoison} className={`${type.name !== 'poison' && 'hidden'}`} alt='' />
-                          <img src={iconpsychic} className={`${type.name !== 'psychic' && 'hidden'}`} alt='' />
-                          <img src={iconrock} className={`${type.name !== 'rock' && 'hidden'}`} alt='' />
-                          <img src={iconsteel} className={`${type.name !== 'steel' && 'hidden'}`} alt='' />
-                          <img src={iconwater} className={`${type.name !== 'water' && 'hidden'}`} alt='' />
-                        </div>
+                    ({ type }, index) => {
+                      return (
+                        <IconTypePokemon key={`${type.name + index}`} typepokemon={type.name} />
                       )
+                    }
                   )}
                 </div>
               </div>

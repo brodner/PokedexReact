@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import IconTypePokemon from './IconTypePokemon'
 
 const Cardspokemon = ({ id, name, sprites, types }) => {
   const backgroundColorTypePokemon = {
@@ -26,27 +27,34 @@ const Cardspokemon = ({ id, name, sprites, types }) => {
   return (
     <Link
       key={id} to={`/PokemonInfo/${id}`}
-      className={`rounded-xl px-5 pb-1 ${backgroundColorTypePokemon[types[0].type.name]} cursor-pointer grid grid-cols-1 items-end hover:shadow-lg`}
+      className={`rounded-xl px-5 pb-3 ${backgroundColorTypePokemon[types[0].type.name]} cursor-pointer grid grid-cols-1 items-end hover:shadow-lg`}
     >
       <div className='flex justify-center col-span-1'>
         {
-                    id > 472
-                      ? <img
-                          src={sprites.other['official-artwork'].front_default}
-                          alt={name}
-                          className=' object-center'
-                        />
-                      : <img src={`https://img.pokemondb.net/sprites/go/normal/${name}.png`} alt='' className=' object-end mt-3' />
-                }
+            id > 472
+              ? <img
+                  src={sprites.other['official-artwork'].front_default}
+                  alt={name}
+                  className=' object-center'
+                />
+              : <img src={`https://img.pokemondb.net/sprites/go/normal/${name}.png`} alt='' className=' object-end mt-3' />
+        }
       </div>
 
       <div className='justify-self-center self-end text-center pb-3 mt-1 col-span-1'>
         <span className='block font-bold text-4xl left-2 text-center text-white'>#{id}</span>
         <h1 className=' text-3xl font-bold capitalize'>{name}</h1>
-        <div className='flex flex-wrap gap-1 col-span-1'>
+        <div className='flex justify-center gap-1 col-span-1'>
           {
-                        types.map(({ type }, index) => <span key={`type${index}`} className='block p-1 px-2 shadow-inner rounded-full bg-white font-extrabold capitalize mt-2 text-'>{type.name}</span>)
-                    }
+           types.map(({ type }, index) => {
+             return (
+               <div className='block' key={`icon${type.name + index + id}`}>
+                 <IconTypePokemon typepokemon={type.name} />
+               </div>
+             )
+           }
+           )
+          }
         </div>
       </div>
     </Link>
