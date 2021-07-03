@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-curly-newline */
 import React, { useState, useEffect } from 'react'
 import Nav from './Nav'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import IconTypePokemon from '../components/IconTypePokemon'
 
 const backgroundColorTypePokemon = {
@@ -30,7 +28,6 @@ const PokemonInfo = props => {
   const [dataPokemon, setDataPokemon] = useState({})
   const [Load, setLoad] = useState(true)
   const [param] = useState(pokemon)
-  const history = useHistory()
   const loadPokemonFromServer = async pokemon => {
     try {
       const textToLowercase = pokemon.toLowerCase()
@@ -95,12 +92,6 @@ const PokemonInfo = props => {
       })
     })
     return evoChain.sort((x, y) => x.id - y.id)
-  }
-
-  const SearchPokemon = (text) => {
-    console.log(text)
-    // history.push({ path: `/PokemonInfo/${text}` })
-    // history.replace(`/PokemonInfo/${text}`)
   }
   return (
     <div className='font-body text-gray-700'>
