@@ -30,6 +30,7 @@ module.exports = {
     extend: {
       gradientColorStops: ['active', 'group-hover']
     },
+    gridColumn: ['responsive', 'first'],
   },
   plugins: [],
 }

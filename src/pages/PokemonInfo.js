@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Nav from './Nav'
 import { useParams } from 'react-router-dom'
 import IconTypePokemon from '../components/IconTypePokemon'
+import imgloadPokemon from '../images/loading.gif'
 
 const backgroundColorTypePokemon = {
   ghost: 'bg-violet-400',
@@ -66,7 +67,6 @@ const PokemonInfo = props => {
       const urlToArray = url.split('/')
       return urlToArray[6]
     }
-    console.log()
     evoChain.push({
       species_name: evoData.species.name,
       min_level: !evoData ? 1 : evoData.min_level,
@@ -98,18 +98,15 @@ const PokemonInfo = props => {
       <Nav />
       {Load
         ? (
-          <div className='p-4 md:w-1/3'>
-            <div className='h-min w-min border-2 border-gray-200 rounded-lg overflow-hidden'>
-              <div className='lg:h-48 bg-gray-400 md:h-36 w-full object-cover object-center' />
-              <div className='p-6'>
-                <h2 className='bg-gray-400 animate-pulse h-4 w-1/4 mb-2'> </h2>
-                <h1 className='w-1/2 mb-4 h-6 animate-pulse bg-gray-500'> </h1>
-                <p className='leading-relaxed mb-3 w-full h-3 animate-pulse bg-gray-400' />
-                <p className='leading-relaxed mb-3 w-2/3 h-3 animate-pulse bg-gray-400' />
-                <p className='leading-relaxed mb-3 w-1/2 h-3 animate-pulse bg-gray-400' />
-                <div className='flex items-center flex-wrap '>
-                  <p className='bg-indigo-300 h-4 animate-pulse mt-2 w-32 inline-flex items-center md:mb-2 lg:mb-0' />
-                  <span className='bg-indigo-300 w-16 mt-2 h-4 animate-pulse mr-3 px-2 inline-flex items-center ml-auto leading-none text-sm pr-5 py-1' />
+          <div className='px-4'>
+            <div className='h-min w-min border-2 border-gray-200 rounded-lg animate-pulse'>
+              <img src={imgloadPokemon} alt='' className='leading-relaxed lg:h-48 bg-gray-400 md:h-36 w-full object-cover object-center' />
+              <div className='px-6'>
+                <span className='leading-relaxed block font-bold text-4xl left-2 text-center text-gray '>#000</span>
+                <h1 className='leading-relaxed w-full mb-4 h-6  bg-gray-500'> </h1>
+                <div className='flex justify-center'>
+                  <p className='leading-relaxed mb-3 mx-auto inline-block p-5 bg-gray-400 rounded-full' />
+                  <p className='leading-relaxed mb-3 p-5 inline-block  bg-gray-400 rounded-full' />
                 </div>
               </div>
             </div>
@@ -163,23 +160,18 @@ const PokemonInfo = props => {
                   )}
                 </div>
               </div>
-              <div className='grid grid-cols-3 gap-2 px-4 mt-4'>
-                <div className='flex flex-col gap-4 border-2 rounded-lg border-gray-200 border-opacity-50 p-8 col-span-3 md:col-span-1'>
-                  <h1 className='text-xl font-bold'>Estadisticas</h1>
-                  {dataPokemon.stats.map(data => (
-                    <div key={data.stat.name}>
-                      <div className='bg-white rounded-lg w-72 shadow block p-4 m-auto'>
-                        {data.stat.name}
-                        <div className='w-full h-4 bg-gray-400 rounded-full mt-3'>
-                          <div className='h-full text-center text-xs text-white bg-red-500 rounded-full w-2/4 w-'>
-                            {data.base_stat}%
-                          </div>
-                        </div>
+              <div className='flex flex-col justify-between md:grid md:grid-cols-3 gap-2 px-4 mt-4 order-1'>
+                <div className='border-2 rounded-lg border-gray-200 border-opacity-50 p-8 order-2 md:order-1 md:col-span-1'>
+                  <h1 className='text-xl font-bold'>Estadisticas Basicas</h1>
+                  <div className='flex flex-wrap gap-3'>
+                    {dataPokemon.stats.map(data => (
+                      <div key={data.stat.name} className='bg-white rounded-lg shadow block p-2 flex-grow'>
+                        {data.stat.name}: {data.base_stat}
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-                <div className='flex flex-col gap-5 border-2 rounded-lg border-gray-200 border-opacity-50 p-2 col-span-3 md:col-span-2'>
+                <div className='flex flex-col gap-5 order-1 md:order-2 md:col-span-2'>
                   <div className='border-2 rounded-lg border-gray-200 border-opacity-50 p-8'>
                     <div className='text-sm'>
                       <div className='grid items-center'>
@@ -197,17 +189,18 @@ const PokemonInfo = props => {
                   </div>
                   <div className='border-2 rounded-lg border-gray-200 border-opacity-50 p-8'>
                     <h1 className='text-xl font-bold col-span-1 mb-4'>Evoluciones</h1>
-                    <div className='text-sm text-center border-b-2 border-red-500 col-span-1 grid justify-center pb-6'>
-                      <div className='flex flex-row justify-items-stretch'>
+                    <div className='text-sm text-cente col-span-1 grid justify-center pb-6'>
+                      <div className='grid grid-cols-2 gap-4'>
                         {
-                          dataPokemon.evoChain.map(({ id, name, min_level: minlevel }, index) => (
-                            <div key={`${index}`} className='card'>
-                              <span className=' font-semibold text-base text-center'>#{id}</span>
-                              <div className='flex items-center'>
+                          dataPokemon.evoChain.map(({ id, species_name: name, min_level: minlevel }, index) => (
+                            <div key={`${index}`} className='first:col-span-2 grid items-strench'>
+                              <div className='flex flex-col items-center'>
                                 {
-                                (typeof minlevel === 'undefined' || typeof minlevel === typeof null) ? '' : <span className='font-semibold text-base p-1'> {`Nivel ${minlevel} =>`} </span>
+                                (typeof minlevel === 'undefined' || typeof minlevel === typeof null) ? '' : <span className='font-semibold text-base p-1 flex justify-center gap-1'> {`Nivel ${minlevel} `} <svg className='w-4 h-4 inline-block' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 10l7-7m0 0l7 7m-7-7v18' /></svg></span>
                                 }
-                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`} alt='' width='100px' />
+                                <img className='flex-grow' src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`} alt='' width='100px' />
+                                <span className='font-semibold text-base text-center capitalize'>{name} #{id}</span>
+                                {index === 0 && <svg className='w-6 h-6 animate-bounce' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 13l-7 7-7-7m14-8l-7 7-7-7' /></svg>}
                               </div>
                             </div>
                           ))
